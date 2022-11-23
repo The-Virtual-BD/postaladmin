@@ -1,0 +1,5 @@
+.dataTables_wrapper .dataTables_length {
+	/* float: left; */
+	position: absolute;
+	bottom: 0;
+}
