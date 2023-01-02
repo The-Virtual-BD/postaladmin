@@ -54,6 +54,13 @@
                     </a>
                 </li>
                 <li class="mr-3 flex-1">
+                    <a href="{{route('admins.index')}}"
+                        class="flex items-center py-1 pl-1 align-middle text-white no-underline hover:text-white ">
+                        <span class="iconify mr-4" data-icon="eos-icons:admin"></span><span
+                            class="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Admins</span>
+                    </a>
+                </li>
+                <li class="mr-3 flex-1">
                     <a href="{{route('roles.index')}}"
                         class="flex items-center py-1 pl-1 align-middle text-white no-underline hover:text-white ">
                         <span class="iconify mr-4" data-icon="eos-icons:role-binding"></span><span
@@ -81,7 +88,7 @@
             <div class="flex justify-between items-center">
 
                 <div class="">
-                    <img src="{{ asset('images/avater.png') }}" alt="" srcset="" class="w-[50px]">
+                    <img src="{{ Auth::user()->profile->photo ? asset(Auth::user()->profile->photo) : asset('images/avatarbig.png') }}" alt="" srcset="" class="w-[50px] rounded-full">
                 </div>
                 <div class="ml-4 text-white">
                     <a href="{{route('myprofile')}}">
@@ -96,8 +103,14 @@
                 <ul class="flex justify-center">
                     <li class="mx-2 hover:text-blue-300"><a href="{{route('myprofile')}}"><span class="iconify"
                                 data-icon="healthicons:ui-user-profile"></span></a></li>
-                    <li class="mx-2 hover:text-blue-300"><a href="{{ route('logout') }}"><span class="iconify"
-                                data-icon="ri:logout-circle-line"></span></a></li>
+                    <li class="mx-2 hover:text-blue-300">
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit"><span class="iconify"
+                                data-icon="ri:logout-circle-line"></span>
+                            </button>
+                        </form>
+                    </li>
                 </ul>
             </div>
             {{-- <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">

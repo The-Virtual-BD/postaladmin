@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('phone');
             $table->string('nib');
             $table->string('suite');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations');
             $table->string('email')->unique();
             $table->string('username')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();

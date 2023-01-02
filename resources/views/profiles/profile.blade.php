@@ -21,6 +21,8 @@
                         {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}
                     </h3>
                     <p class="text-blue font-bold capitalize">Role: {{ Auth::user()->roles->first()->name }}</p>
+                    <p class="text-blue font-bold capitalize">Email: {{ Auth::user()->email }}</p>
+                    <p class="text-blue font-bold capitalize">NIB: {{ Auth::user()->nib }}</p>
                 </div>
             </div>
         </div>

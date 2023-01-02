@@ -22,11 +22,14 @@
                     <img src="{{ Auth::user()->profile->photo ? asset(Auth::user()->profile->photo) : asset('images/avatarbig.png') }}"
                         alt="" class="w-24 h-auto rounded-full">
                     <span class="iconify-inline absolute top-0 right-0 text-blue-500 hover:scale-105" data-icon="mdi:lead-pencil" onclick="document.getElementById('selectedFile').click();"></span>
+                    <span class="text-xs text-red-500">Image must be squire 1:1 <br> Max: 256x256</span>
                 </div>
                 <div class="font-inter">
                     <h3 class="font-poppins font-medium text-xl">
                         {{ Auth::user()->firstname . ' ' . Auth::user()->lastname }}
                     </h3>
+                    <p class="text-blue font-bold capitalize">Email: {{ Auth::user()->email }}</p>
+                    <p class="text-blue font-bold capitalize">NIB: {{ Auth::user()->nib }}</p>
                 </div>
             </div>
         </div>
@@ -125,8 +128,6 @@
                 $("#selectedFile").on('input', function() {
                     $("#studentppform").submit();
                 });
-
-
             });
         </script>
     </x-slot>

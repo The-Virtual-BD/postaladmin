@@ -27,7 +27,8 @@ return new class extends Migration
             $table->longText('address')->nullable();
             $table->string('house')->nullable();
             $table->string('region')->nullable();
-            $table->string('location')->nullable();
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations');
             $table->string('phone')->nullable();
             $table->string('photo')->nullable();
             $table->string('nib')->nullable();
