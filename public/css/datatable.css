@@ -1,0 +1,19 @@
+table.dataTable{
+    margin-bottom: 12px !important;
+}
+.dataTables_wrapper .dataTables_length {
+	position: absolute;
+	bottom: 0;
+}
+.dataTables_info{
+    display: none !important;
+}
+
+
+
+table.dataTable thead th,
+table.dataTable thead td,
+table.dataTable.no-footer {
+	border:none !important;
+}
+

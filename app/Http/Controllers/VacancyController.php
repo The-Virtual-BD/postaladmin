@@ -23,6 +23,18 @@ class VacancyController extends Controller
                     ->make(true);
 
         }
+
+        return view('vacancies.index');
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         $islands = [
             'Abaco'=>'Abaco',
             'Acklins'=>'Acklins',
@@ -42,20 +54,10 @@ class VacancyController extends Controller
             'Ragged Island'=>'Ragged Island',
             'Rum Cay'=>'Rum Cay',
             'San Salvador'=>'San Salvador'];
+            
         $jobTypes =['1'=>'Full Time','2'=>'Part Time','3'=>'Remote'];
 
-        return view('vacancies.index',compact('islands','jobTypes'));
-    }
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('vacancies.create');
+        return view('vacancies.create',compact('islands','jobTypes'));
     }
 
     /**

@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="icon" href="{{asset('robin.png')}}" type="image/png">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -14,6 +15,8 @@
             var PROCESSING_IMG = "{{ asset('images/ajax-loading.gif') }}";
         </script>
 
+        <link rel="stylesheet" href="{{asset('css/datatable.css')}}">
+
         <!-- Page headcss -->
         @if (isset($headcss))
             {{ $headcss }}
@@ -22,17 +25,19 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.partials.header')
+    <body class="font-sans antialiased flex">
 
-            <main class="mt-[67px]">
-                <div class="flex flex-col md:flex-row">
-                    @include('layouts.partials.sidebar')
-                    <section class="w-full">
-                        {{ $slot }}
-                    </section>
-                </div>
+
+        <div class="w-52 hidden sm:block transition duration-150 ease-in-out" id="sidebar">
+            @include('layouts.partials.sidebar')
+        </div>
+
+        <div class="min-h-screen bg-gray-100 flex-grow">
+            @include('layouts.navigation')
+
+            <!-- Page Content -->
+            <main class="p-4 sm:p-6">
+                {{ $slot }}
             </main>
         </div>
 
@@ -42,13 +47,7 @@
             integrity="sha512-lYMiwcB608+RcqJmP93CMe7b4i9G9QK1RbixsNu4PzMRJMsqr/bUrkXUuFzCNsRUo3IXNUr5hz98lINURv5CNA=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script type="text/javascript">
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        </script>
+        <script src="{{asset('js/custom.js')}}"></script>
         <!-- Page Script -->
         @if (isset($script))
             {{ $script }}

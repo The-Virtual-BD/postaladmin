@@ -33,6 +33,7 @@ use App\Http\Controllers\TeamMemberController;
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
 Route::group(['middleware' => ['auth']], function() {
 
     // Home controller
