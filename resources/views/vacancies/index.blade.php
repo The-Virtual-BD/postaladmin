@@ -13,21 +13,23 @@
     {{-- Header style --}}
     <x-slot name="headcss">
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+        <!--Responsive Extension Datatables CSS-->
+	    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
     </x-slot>
 
     <div id="main" class="">
 
-        <div class="p-6 bg-white rounded-md">
+        <div class="p-6 bg-white rounded-md w-full">
             <h1 class="text-2xl mb-6 font-bold">Vacancies</h1>
-            <table id="vacancyTable" class="display text-center">
+            <table id="vacancyTable" class="display text-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Location</th>
-                        <th>Vacancy</th>
-                        <th>Job Type</th>
-                        <th>Last Date</th>
-                        <th>Action</th>
+                        <th data-priority="1">Title</th>
+                        <th data-priority="3">Location</th>
+                        <th data-priority="3">Vacancy</th>
+                        <th data-priority="3">Job Type</th>
+                        <th data-priority="3">Last Date</th>
+                        <th data-priority="2">Action</th>
                     </tr>
                 </thead>
 
@@ -95,15 +97,16 @@
                             let bookInfoUrl = BASE_URL + 'books/info/' + data.id
                             return `<div class="flex justify-end item-center"><a href="${BASE_URL}vacancies/${data.id}" class="bg-blue-500 rounded-md text-white py-2 px-2 mx-1 hover:bg-blue-700"><span class="iconify" data-icon="carbon:view-filled"></span></a>
                             <a href="${BASE_URL}vacancies/${data.id}/edit" class="bg-green-400 rounded-md text-white py-2 px-2 mx-1 hover:bg-green-700" ><span class="iconify" data-icon="dashicons:edit"></span></a>
-                            <button type="button"  class="bg-red-400 rounded-md text-white py-2 px-2 mx-1 hover:bg-red-700" onclick="deletebook(${data.id});"><span class="iconify" data-icon="bi:trash-fill"></span></button></div>`;
+                            <button type="button"  class="bg-red-400 rounded-md text-white py-2 px-2 mx-1 hover:bg-red-700" onclick="deletevacancy(${data.id});"><span class="iconify" data-icon="bi:trash-fill"></span></button></div>`;
                         }
                     }
                 ]
-            });
+            }).columns.adjust().responsive.recalc();
 
 
 
-            function deletebook(bookId) {
+
+            function deletevacancy(vacID) {
                 Swal.fire({
                     title: "Delete ?",
                     text: "Are you sure to delete this Job ?",
@@ -116,7 +119,7 @@
                     if (result.value) {
                         $.ajax({
                             method: 'DELETE',
-                            url: BASE_URL +'vacancies/'+bookId,
+                            url: BASE_URL +'vacancies/'+vacID,
                             success: function (response) {
                                 if (response.status == "success") {
                                     Swal.fire('Success!', response.message, 'success');

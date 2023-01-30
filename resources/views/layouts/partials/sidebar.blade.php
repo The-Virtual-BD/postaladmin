@@ -1,4 +1,4 @@
-<nav aria-label="alternative nav" class="bg-blue-500">
+<nav aria-label="alternative nav" class="">
     <!-- Logo -->
     <div class="shrink-0 flex justify-center items-center bg-white h-16 p-2">
         <a href="{{ route('index') }}" class="flex justify-center items-center">
@@ -7,11 +7,13 @@
     </div>
     <div class="h-20 md:h-screen z-10 w-full  content-center">
 
-        <div class=" content-center md:content-start text-left justify-between sidenav">
+        <div class=" content-center md:content-start text-left justify-between sidenav relative">
             <x-sidenav-link :href="route('index')" :active="request()->routeIs('index')">
                 <span class="iconify" data-icon="ci:home-alt-fill"></span>
                 <p class="sidelinktext">Dashboard</p>
             </x-sidenav-link>
+
+
 
             <x-sidenav-link :href="route('vacancies.index')" :active="request()->routeIs('vacancies.*')">
                 <span class="iconify" data-icon="bxs:spreadsheet"></span>
@@ -46,11 +48,19 @@
                 <span class="iconify" data-icon="fluent-mdl2:permissions-solid"></span>
                 <p class="sidelinktext">Permissions</p>
             </x-sidenav-link>
+
             <hr class="border border-blue-400/90">
-            <x-sidenav-link :href="route('settings.index')" :active="request()->routeIs('settings.*')">
+            <x-sidenav-link :href="route('currier.dash')" :active="request()->routeIs('currier.dash')">
+                <span class="iconify" data-icon="bxs:package"></span>
+                <p class="sidelinktext">Currier</p>
+            </x-sidenav-link>
+
+            <x-sidenav-link :href="route('settings.index')" :active="request()->routeIs('settings.*')" class="fixed bottom-0 w-52" id="settingmenu">
                 <span class="iconify" data-icon="ant-design:setting-filled"></span>
                 <p class="sidelinktext">Settings</p>
             </x-sidenav-link>
+
+
         </div>
 
     </div>

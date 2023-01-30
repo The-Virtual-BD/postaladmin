@@ -15,7 +15,8 @@ class TeamMemberController extends Controller
      */
     public function index()
     {
-        //
+        $members = TeamMember::all();
+        return view('teamMembers.index',compact('members'));
     }
 
     /**
@@ -25,7 +26,7 @@ class TeamMemberController extends Controller
      */
     public function create()
     {
-        //
+        return view('teamMembers.create');
     }
 
     /**
@@ -36,7 +37,23 @@ class TeamMemberController extends Controller
      */
     public function store(StoreTeamMemberRequest $request)
     {
-        //
+        $member = new TeamMember();
+        $member->name = $request->name;
+        $member->designation = $request->designation;
+        $member->email = $request->email;
+        $member->phone = $request->phone;
+
+        if ($request->file('photo')) {
+            $file = $request->file('photo');
+            $filefullname = time().'.'.$file->getClientOriginalExtension();
+            $upload_path = 'images/member/';
+            $fileurl = $upload_path.$filefullname;
+            $success = $file->move($upload_path, $filefullname);
+            $member->photo = $fileurl;
+        }
+        $member->save();
+
+        return redirect()->route('teamMembers.index');
     }
 
     /**
@@ -58,7 +75,7 @@ class TeamMemberController extends Controller
      */
     public function edit(TeamMember $teamMember)
     {
-        //
+        return view('teamMembers.edit', compact('teamMember'));
     }
 
     /**
@@ -70,7 +87,33 @@ class TeamMemberController extends Controller
      */
     public function update(UpdateTeamMemberRequest $request, TeamMember $teamMember)
     {
-        //
+        if ($request->status) {
+            if ($request->status == 1) {
+                $teamMember->status = 2;
+            }else {
+                $teamMember->status = 1;
+            }
+            $teamMember->update();
+            return redirect()->route('teamMembers.index');
+        }
+
+        $teamMember->name = $request->name;
+        $teamMember->designation = $request->designation;
+        $teamMember->email = $request->email;
+        $teamMember->phone = $request->phone;
+
+        if ($request->file('photo')) {
+            unlink($teamMember->photo);
+            $file = $request->file('photo');
+            $filefullname = time().'.'.$file->getClientOriginalExtension();
+            $upload_path = 'images/member/';
+            $fileurl = $upload_path.$filefullname;
+            $success = $file->move($upload_path, $filefullname);
+            $teamMember->photo = $fileurl;
+        }
+        $teamMember->update();
+
+        return redirect()->route('teamMembers.index');
     }
 
     /**
@@ -81,6 +124,9 @@ class TeamMemberController extends Controller
      */
     public function destroy(TeamMember $teamMember)
     {
-        //
+        unlink($teamMember->photo);
+        $teamMember->delete();
+        return redirect()->route('teamMembers.index');
+
     }
 }

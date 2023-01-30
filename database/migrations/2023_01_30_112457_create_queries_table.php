@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('team_members', function (Blueprint $table) {
+        Schema::create('queries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('designation');
             $table->string('email');
             $table->string('phone');
-            $table->string('photo');
-            $table->tinyInteger('status')->default(1)->comment('1 => Active, 2 => Deactivated');
+            $table->longText('message');
+            $table->enum('status', ['unreaded', 'readed','replied'])->default('unreaded');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('team_members');
+        Schema::dropIfExists('queries');
     }
 };

@@ -26,11 +26,11 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased font-poppins flex">
+    <body class="font-poppins antialiased flex">
 
 
         <div class="w-52 hidden sm:block transition duration-150 ease-in-out" id="sidebar">
-            @include('layouts.partials.sidebar')
+            @include('layouts.partials.csidebar')
         </div>
 
         <div class="min-h-screen bg-gray-100 flex-grow">

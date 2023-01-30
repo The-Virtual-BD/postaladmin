@@ -16,6 +16,7 @@ function sidebartoggle() {
     $('.sidebarmenu li a').toggleClass('justify-center');
     $('.sidebarmenu li').toggleClass('mr-3');
     $('.logo-title').toggleClass('hidden');
+    $('#settingmenu').toggleClass('w-52').toggleClass('w-20');
 
     $('.sidenav a').toggleClass('justify-center');
 }

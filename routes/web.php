@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FlightController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\VacancyController;
@@ -61,6 +62,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('teamMembers', TeamMemberController::class);
 
 
+    Route::resource('flights',FlightController::class);
+
+
+
 
 
     // Role routs
@@ -104,6 +109,13 @@ Route::group(['middleware' => ['auth']], function() {
         ];
 
         return view('mail.newuser',compact('details'));
+    });
+
+
+
+    Route::group(['prefix' => 'currier'], function ()
+    {
+        Route::get('/', function () {return view('cdash.index');})->name('currier.dash');
     });
 
 });
