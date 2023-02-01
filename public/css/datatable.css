@@ -13,8 +13,8 @@ table.dataTable thead th,
 table.dataTable thead td,
 table.dataTable.no-footer {
     border: none !important;
+    font-weight: 400 !important;
 }
-
 /* ------------------------------------------------------  */
 
 /*Overrides for Tailwind CSS */

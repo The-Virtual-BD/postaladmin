@@ -15,6 +15,16 @@ class VacancyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:vacancy', ['only' => ['index','create','store','edit','update','destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -54,7 +64,7 @@ class VacancyController extends Controller
             'Ragged Island'=>'Ragged Island',
             'Rum Cay'=>'Rum Cay',
             'San Salvador'=>'San Salvador'];
-            
+
         $jobTypes =['1'=>'Full Time','2'=>'Part Time','3'=>'Remote'];
 
         return view('vacancies.create',compact('islands','jobTypes'));

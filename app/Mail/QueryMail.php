@@ -9,18 +9,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class NewUseMail extends Mailable
+class QueryMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
+     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($msg)
     {
-        $this->details = $details;
+        $this->msg = $msg;
     }
 
 
@@ -31,8 +31,9 @@ class NewUseMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.newuser', [
-            'details' => $this->details,
-        ])->subject('Welcome To Bahamas Postal Serviece');
+        return $this->view('emails.contactus',[
+            'msg' => $this->msg,
+        ])->subject('Thanks from Dinghy Foundation');
     }
+
 }

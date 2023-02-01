@@ -8,6 +8,16 @@ use App\Http\Requests\UpdateTeamMemberRequest;
 
 class TeamMemberController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+         $this->middleware('permission:team', ['only' => ['index','create','store','edit','update','destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *

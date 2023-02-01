@@ -11,8 +11,11 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QueryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamMemberController;
+use App\Mail\NewUseMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,15 +105,31 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/newusermail' ,function ()
     {
         $details = [
-            'name' => 'User',
-            'email' => 'user@app.com',
+            'name' => 'Sabbir Hussain',
+            'email' => 'jakir56320@breazeim.com',
             'password' => '123456789',
             'body' => 'Welcome! Please save these information below and dont share with anyone. We dont have a copy of it.',
         ];
 
-        return view('mail.newuser',compact('details'));
+        // Sending Mail
+        try {
+            $mail = Mail::to('jakir56320@breazeim.com')->send(new NewUseMail($details));
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+        return redirect()->route('index');
     });
 
+    // Contuc us query
+    Route::group(['prefix' => 'quaries'], function () {
+        Route::get('allquaries', [QueryController::class, 'allquaries'])->name('quaries.all');
+        Route::get('readed', [QueryController::class, 'readed'])->name('quaries.readed');
+        Route::get('unreaded', [QueryController::class, 'unreaded'])->name('quaries.unreaded');
+        Route::get('read/{query}', [QueryController::class, 'read'])->name('quaries.read');
+        Route::post('replay', [QueryController::class, 'replay'])->name('quaries.replay');
+        Route::patch('toggle/{query}', [QueryController::class, 'toggle'])->name('toggleQuery');
+        Route::delete('delete/{query}', [QueryController::class, 'destroy'])->name('deleteQuery');
+    });
 
 
     Route::group(['prefix' => 'currier'], function ()

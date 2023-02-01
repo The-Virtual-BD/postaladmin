@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewUseMail;
 use App\Mail\NewUserAdded;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,8 +10,21 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Profile;
 use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Expr\New_;
+
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+         $this->middleware('permission:user', ['only' => ['index','create','store','edit','update','destroy']]);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -81,14 +95,14 @@ class UserController extends Controller
             'password' => $randomnumber,
             'body' => 'Welcome! Please save these information below. We dont have a copy of it.',
         ];
-        
-        // try {
 
-        //     $mail = Mail::to($user->email)->send(new NewUserAdded($details));
-        // } catch (\Exception $e) {
+        try {
 
-        //     return $e->getMessage();
-        // }
+            $mail = Mail::to($user->email)->send(new NewUseMail($details));
+        } catch (\Exception $e) {
+
+            return $e->getMessage();
+        }
 
 
 

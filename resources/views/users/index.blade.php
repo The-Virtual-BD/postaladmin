@@ -1,37 +1,36 @@
 
 <x-app-layout>
+
+
+    <x-slot name="submenu">
+        <!-- Navigation Links -->
+            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                {{ __('All User') }}
+            </x-nav-link>
+            <x-nav-link :href="route('users.create')" :active="request()->routeIs('users.create')">
+                {{ __('New User') }}
+            </x-nav-link>
+    </x-slot>
+
+
     {{-- Header style --}}
     <x-slot name="headcss">
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     </x-slot>
-    <div id="main" class="main-content flex-1 bg-gray-100 pb-24 md:pb-5">
 
-        <div class="shadow flex justify-between items-center">
-            <div class="p-4  text-2xl">
-                <h1 class="font-bold pl-2">Users</h1>
-            </div>
-            <div class="p-4">
-                <a href="{{ route('users.create') }}"><button class="py-1 px-2 rounded bg-blue-500 text-white">Create
-                        User</button></a>
-            </div>
-        </div>
-
-        <div class="p-4 w-full">
-            <table id="userTable" class="display text-center">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>NIB</th>
-                        <th>Suite Code</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-
-
-            </table>
-        </div>
+    <div class="p-6 bg-white rounded-md">
+        <table id="userTable" class="display text-center">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>NIB</th>
+                    <th>Suite Code</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 
 

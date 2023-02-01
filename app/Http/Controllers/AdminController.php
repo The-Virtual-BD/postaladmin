@@ -15,6 +15,18 @@ use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function __construct()
+    {
+         $this->middleware('permission:admin', ['only' => ['index','create','store','edit','update','destroy']]);
+    }
+
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -105,7 +117,7 @@ class AdminController extends Controller
             $request->validate([
                 'password' => ['required','confirmed', Rules\Password::defaults()],
             ]);
-            
+
             $user->update([
                 'password' => Hash::make($request->password),
             ]);

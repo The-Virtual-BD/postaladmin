@@ -15,6 +15,16 @@ class GalleryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+         $this->middleware('permission:gallery', ['only' => ['index','create','store','edit','update','destroy']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         if ($request->ajax()) {
@@ -30,7 +40,8 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        //
+        return view('galleries.create');
+
     }
 
     /**

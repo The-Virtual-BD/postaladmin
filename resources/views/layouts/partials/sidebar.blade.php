@@ -31,6 +31,10 @@
                 <span class="iconify" data-icon="material-symbols:group-rounded"></span>
                 <p class="sidelinktext">Team</p>
             </x-sidenav-link>
+            <x-sidenav-link :href="route('quaries.all')" :active="request()->routeIs('quaries.*')">
+                <span class="iconify" data-icon="tabler:message-circle-2-filled"></span>
+                <p class="sidelinktext">Queries</p>
+            </x-sidenav-link>
             <hr class="border border-blue-400/90">
             <x-sidenav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                 <span class="iconify" data-icon="icon-park-solid:avatar"></span>
@@ -54,6 +58,7 @@
                 <span class="iconify" data-icon="bxs:package"></span>
                 <p class="sidelinktext">Currier</p>
             </x-sidenav-link>
+            <div class="w-20"></div>
 
             <x-sidenav-link :href="route('settings.index')" :active="request()->routeIs('settings.*')" class="fixed bottom-0 w-52" id="settingmenu">
                 <span class="iconify" data-icon="ant-design:setting-filled"></span>
