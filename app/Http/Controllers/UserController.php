@@ -102,13 +102,13 @@ class UserController extends Controller
             'body' => 'Welcome! Please save these information below. We dont have a copy of it.',
         ];
 
-        try {
+        // try {
 
-            $mail = Mail::to($user->email)->send(new NewUseMail($details));
-        } catch (\Exception $e) {
+        //     $mail = Mail::to($user->email)->send(new NewUseMail($details));
+        // } catch (\Exception $e) {
 
-            return $e->getMessage();
-        }
+        //     return $e->getMessage();
+        // }
 
 
 

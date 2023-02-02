@@ -93,11 +93,11 @@ class AdminController extends Controller
         ];
 
         // Sending Mail
-        try {
-            $mail = Mail::to($user->email)->send(new NewUseMail($details));
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
+        // try {
+        //     $mail = Mail::to($user->email)->send(new NewUseMail($details));
+        // } catch (\Exception $e) {
+        //     return $e->getMessage();
+        // }
 
         return redirect()->route('admins.index');
     }
