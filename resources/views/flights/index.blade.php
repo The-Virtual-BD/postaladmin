@@ -20,25 +20,26 @@
 
         <div class="p-6 bg-white rounded-md w-full mb-4">
             <form action="" method="post">
-                <div class="grid grid-cols-5 gap-3">
-                    <div class="col-span-5 sm:col-span-1 flex justify-between items-center">
-                        <label for="requestDate" class="block text-sm font-medium text-gray-700 mr-2">Request
+
+                <div class="flex gap-3 flex-wrap">
+                    <div class="flex justify-between min-w-[312px] items-center">
+                        <label for="requestDate" class="block text-sm font-normal sm:font-medium text-gray-700 mr-2">Request
                             Date</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" name="requestDate" id="requestDate"
                                 class="block w-48  flex-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                         </div>
                     </div>
-                    <div class="col-span-5 sm:col-span-1 flex justify-between items-center">
-                        <label for="deptime" class="block text-sm font-medium text-gray-700 mr-2">Departure
+                    <div class="flex justify-between min-w-[312px] items-center">
+                        <label for="deptime" class="block text-sm font-normal sm:font-medium text-gray-700 mr-2">Departure
                             Time</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" name="deptime" id="deptime"
                                 class="block w-48  flex-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                         </div>
                     </div>
-                    <div class="col-span-5 sm:col-span-1 flex justify-between items-center">
-                        <label for="arrtime" class="block text-sm font-medium text-gray-700 mr-2">Arrival Time</label>
+                    <div class="flex justify-between min-w-[312px] items-center">
+                        <label for="arrtime" class="block text-sm font-normal sm:font-medium text-gray-700 mr-2">Arrival Time</label>
                         <div class="mt-1 flex rounded-md shadow-sm">
                             <input type="text" name="arrtime" id="arrtime"
                                 class="block w-48  flex-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
@@ -48,40 +49,44 @@
 
 
 
-                <div class="grid grid-cols-5 gap-3 mt-3">
-                    <div class="sm:col-span-1 flex justify-between items-center">
-                        <label for="origin" class="block text-sm font-medium text-gray-700 mr-2">Origin</label>
+                <div class="flex flex-wrap gap-3 mt-3">
+                    <div class="min-w-[312px] flex justify-between items-center">
+                        <label for="origin" class="block text-sm font-normal sm:font-medium text-gray-700 mr-2">Origin</label>
                         <select id="origin" name="origin"
                             class="mt-1 block w-48  rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm">
                             <option value="MIM">MIM</option>
                             <option value="NAS">NAS</option>
                         </select>
                     </div>
-                    <div class="sm:col-span-1 flex justify-between items-center">
-                        <label for="deperture" class="block text-sm font-medium text-gray-700 mr-2">Departure</label>
+                    <div class="min-w-[312px] flex justify-between items-center">
+                        <label for="deperture" class="block text-sm font-normal sm:font-medium text-gray-700 mr-2">Departure</label>
                         <select id="deperture" name="deperture"
                             class="mt-1 block w-48  rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm">
                             <option value="MIM">MIM</option>
                             <option value="NAS">NAS</option>
                         </select>
                     </div>
-                    <div class="sm:col-span-1 flex justify-between items-center">
-                        <label for="change" class="block text-sm font-medium text-gray-700 mr-2">Change</label>
+                    <div class="min-w-[312px] flex justify-between items-center">
+                        <label for="change" class="block text-sm font-normal sm:font-medium text-gray-700 mr-2">Change</label>
                         <select id="change" name="change"
                             class="mt-1 block w-48  rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm">
                             <option value="N">No</option>
                             <option value="Y">Yes</option>
                         </select>
                     </div>
-                    <div class="sm:col-span-1 flex justify-between items-center">
-                        <label for="connect" class="block text-sm font-medium text-gray-700 mr-2">Connect</label>
+                    <div class="min-w-[312px] flex justify-between items-center">
+                        <label for="connect" class="block text-sm font-normal sm:font-medium text-gray-700 mr-2">Connect</label>
                         <input type="number" name="connect" id="connect" value="0"
                             class="block w-48  flex-1 rounded-md border-gray-300 focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                     </div>
                 </div>
             </form>
         </div>
-        <div class="p-6 bg-white rounded-md w-full">
+
+
+
+
+        <div class="p-6 bg-white rounded-md w-full hidden">
             <table id="flighttable" class="display text-center" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                 <thead>
                     <tr class="uppercase">

@@ -56,7 +56,7 @@
                 datatablelist = $('#quaryTable').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: "{!! route('quaries.unreaded') !!}",
+                    ajax: "{!! route('quaries.readed') !!}",
                     columns: [{
                             "render": function(data, type, full, meta) {
                                 return meta.row + meta.settings._iDisplayStart + 1;
@@ -77,12 +77,15 @@
                         {
                             data: null,
                             render: function(data) {
-                                if (data.status == 1) {
+                                if (data.status == 'unreaded') {
                                     var statusLabels =
                                         '<span  class="bg-green-500 rounded-full text-white text-sm px-2 inline-block py-1"><span class="iconify" data-icon="ic:outline-email"></span></span>';
-                                } else {
+                                } else if (data.status == 'readed') {
                                     var statusLabels =
                                         '<span  class="bg-orange-300 rounded-full text-gray-800 text-sm px-2 inline-block py-1"><span class="iconify" data-icon="mdi:email-open-outline"></span></span>';
+                                } else {
+                                    var statusLabels =
+                                        '<span  class="bg-orange-300 rounded-full text-gray-800 text-sm px-2 inline-block py-1">Replied</span>';
                                 }
                                 return statusLabels;
                             }
@@ -90,7 +93,7 @@
                         {
                             data: null,
                             render: function(data) {
-                                return `<div class="flex"><a href="${BASE_URL}dashboard/quaries/read/${data.id}" class="bg-blue-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-blue-700" ><span class="iconify" data-icon="ic:baseline-remove-red-eye"></span></a><button type="button"  class="bg-red-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-red-700" onclick="quaryDelete(${data.id});"><span class="iconify" data-icon="bi:trash-fill"></span></button></div>`;
+                                return `<div class="flex"><a href="${BASE_URL}quaries/read/${data.id}" class="bg-blue-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-blue-700" ><span class="iconify" data-icon="ic:baseline-remove-red-eye"></span></a><button type="button"  class="bg-red-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-red-700" onclick="quaryDelete(${data.id});"><span class="iconify" data-icon="bi:trash-fill"></span></button></div>`;
                             }
                         }
                     ]
@@ -110,7 +113,7 @@
                     if (result.value) {
                         $.ajax({
                             method: 'DELETE',
-                            url: BASE_URL + 'dashboard/quaries/delete/' + quaryID,
+                            url: BASE_URL + 'quaries/delete/' + quaryID,
                             success: function(response) {
                                 if (response.status == "success") {
                                     Swal.fire('Success!', response.message, 'success');
@@ -140,7 +143,7 @@
                     if (result.value) {
                         $.ajax({
                             method: 'PATCH',
-                            url: BASE_URL + 'dashboard/quaries/toggle/' + quaryID,
+                            url: BASE_URL + 'quaries/toggle/' + quaryID,
                             data: {
                                 quaryID: quaryID,
                                 updateStatus: updateStatus,

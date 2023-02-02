@@ -1,17 +1,15 @@
 <x-app-layout>
     <x-slot name="submenu">
         <!-- Navigation Links -->
-        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-            <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
-                {{ __('All Permissions') }}
-            </x-nav-link>
-            <x-nav-link :href="route('permissions.create')" :active="request()->routeIs('permissions.create')">
-                {{ __('Add New Permission') }}
-            </x-nav-link>
-            <x-nav-link :href="route('permissions.edit',$permission->id)" :active="request()->routeIs('permissions.edit')">
-                {{ __('Editing Permission') }}
-            </x-nav-link>
-        </div>
+        <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
+            {{ __('All Permissions') }}
+        </x-nav-link>
+        <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
+            {{ __('All Role') }}
+        </x-nav-link>
+        <x-nav-link :href="route('roles.create')" :active="request()->routeIs('roles.create')">
+            {{ __('New Role') }}
+        </x-nav-link>
     </x-slot>
 
     <div class="p-6">

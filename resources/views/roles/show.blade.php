@@ -1,16 +1,18 @@
 <x-app-layout>
-
     <x-slot name="submenu">
         <!-- Navigation Links -->
-            <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
-                {{ __('All Role') }}
-            </x-nav-link>
-            <x-nav-link :href="route('roles.create')" :active="request()->routeIs('roles.create')">
-                {{ __('New Role') }}
-            </x-nav-link>
-            <x-nav-link :href="route('roles.edit',$role->id)" :active="request()->routeIs('roles.edit')">
-                {{ __('Edit this Role') }}
-            </x-nav-link>
+        <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
+            {{ __('All Permissions') }}
+        </x-nav-link>
+        <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
+            {{ __('All Role') }}
+        </x-nav-link>
+        <x-nav-link :href="route('roles.create')" :active="request()->routeIs('roles.create')">
+            {{ __('New Role') }}
+        </x-nav-link>
+        <x-nav-link :href="route('roles.edit',$role->id)" :active="request()->routeIs('roles.edit')">
+            {{ __('Edit this Role') }}
+        </x-nav-link>
     </x-slot>
 
 
@@ -24,11 +26,11 @@
             <fieldset>
                 <div class="text-base font-medium text-gray-900" aria-hidden="true">Permissions:</div>
                 <div class="mt-4 space-y-4">
-                    <div class="grid grid-cols-4">
+                    <ul class="list-disc pl-6">
                         @foreach ($rolePermissions as $value)
-                        <p for="comments" class="font-medium text-gray-700">{{ $value->name }}</p>
+                        <li>{{ $value->name }}</li>
                         @endforeach
-                    </div>
+                    </ul>
                 </div>
             </fieldset>
         </div>

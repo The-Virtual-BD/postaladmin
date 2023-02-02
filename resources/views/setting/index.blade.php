@@ -1,12 +1,6 @@
 <x-app-layout>
     <div id="main" class="main-content flex-1 bg-gray-100 pb-24 md:pb-5 ">
 
-        <div class="shadow flex justify-between items-center">
-            <div class="p-4  text-2xl">
-                <h1 class="font-bold pl-2">Settings</h1>
-            </div>
-        </div>
-
         <div class="p-4 w-full">
             <div>
                 <div class="md:grid md:grid-cols-3 md:gap-6">

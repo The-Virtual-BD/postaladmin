@@ -10,7 +10,7 @@
         <div class=" content-center md:content-start text-left justify-between sidenav">
             <x-sidenav-link :href="route('index')" :active="request()->routeIs('index')">
                 <span class="iconify" data-icon="ci:home-alt-fill"></span>
-                <p class="sidelinktext">Admin Dash</p>
+                <p class="sidelinktext">Dashboard</p>
             </x-sidenav-link>
 
             <x-sidenav-link :href="route('currier.dash')" :active="request()->routeIs('currier.dash')">

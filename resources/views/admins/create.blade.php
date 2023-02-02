@@ -38,6 +38,15 @@
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
+                        <x-input-label for="role">Role</x-input-label>
+                        <select name="role" id="role" class="w-full font-poppins rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                            @foreach ($roles as $role)
+                            <option value="{{$role->id}}" >{{$role->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
                         <x-input-label for="nib">NIB</x-input-label>
                         <x-text-input type="text" name="nib" id="nib" class="w-full" required/>
                     </div>

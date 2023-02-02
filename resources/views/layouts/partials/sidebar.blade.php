@@ -44,13 +44,9 @@
                 <span class="iconify" data-icon="eos-icons:admin"></span>
                 <p class="sidelinktext">Admins</p>
             </x-sidenav-link>
-            <x-sidenav-link :href="route('roles.index')" :active="request()->routeIs('roles.*')">
+            <x-sidenav-link :href="route('roles.index')" :active="request()->routeIs(['roles.*','permissions.*'])">
                 <span class="iconify" data-icon="eos-icons:role-binding"></span>
                 <p class="sidelinktext">Roles</p>
-            </x-sidenav-link>
-            <x-sidenav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.*')">
-                <span class="iconify" data-icon="fluent-mdl2:permissions-solid"></span>
-                <p class="sidelinktext">Permissions</p>
             </x-sidenav-link>
 
             <hr class="border border-blue-400/90">

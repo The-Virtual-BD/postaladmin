@@ -23,7 +23,7 @@ class AdminController extends Controller
      */
     function __construct()
     {
-         $this->middleware('permission:admin', ['only' => ['index','create','store','edit','update','destroy']]);
+        $this->middleware('permission:admin', ['only' => ['index', 'create', 'store', 'edit', 'update', 'destroy']]);
     }
 
 
@@ -32,8 +32,9 @@ class AdminController extends Controller
         if ($request->ajax()) {
             return Datatables::of(
                 User::with('roles')->whereHas(
-                    'roles', function($q){
-                        $q->where('name', 'admin');
+                    'roles',
+                    function ($q) {
+                        $q->where('name', '!=', 'user');
                     }
                 )->get()
             )->addIndexColumn()->make(true);
@@ -44,8 +45,8 @@ class AdminController extends Controller
 
     public function create()
     {
-        return view('admins.create');
-
+        $roles = Role::where('name', '!=', 'user')->get();
+        return view('admins.create', compact('roles'));
     }
 
 
@@ -54,7 +55,7 @@ class AdminController extends Controller
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -80,13 +81,12 @@ class AdminController extends Controller
             'user_id' => $user->id
         ]);
 
-        // Assigning admin role
-        $role = Role::where('name','admin')->first();
-        $user->assignRole([$role->id]);
+
+        $user->assignRole([$request->role]);
 
         // Information that will sent to new user
         $details = [
-            'name' => $user->firstname.$user->lastname,
+            'name' => $user->firstname . $user->lastname,
             'email' => $user->email,
             'password' => $request->password,
             'body' => 'Welcome! Please save these information below and dont share with anyone. We dont have a copy of it.',
@@ -104,18 +104,18 @@ class AdminController extends Controller
 
 
     // Editing id
-    public function edit ($id)
+    public function edit($id)
     {
         $admin = User::find($id);
 
-        return view('admins.edit',compact('admin'));
+        return view('admins.edit', compact('admin'));
     }
 
-    public function update (Request $request, User $user)
+    public function update(Request $request, User $user)
     {
         if ($request->password) {
             $request->validate([
-                'password' => ['required','confirmed', Rules\Password::defaults()],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
             ]);
 
             $user->update([
@@ -124,10 +124,10 @@ class AdminController extends Controller
 
             // Information that will sent to new user
             $details = [
-                'name' => $user->firstname.$user->lastname,
+                'name' => $user->firstname . $user->lastname,
                 'email' => $user->email,
                 'password' => $request->password,
-                'body' => 'Hello,'.$user->firstname.'! Your Password Updated. Please save these informations and dont share with anyone. We dont have a copy of it.',
+                'body' => 'Hello,' . $user->firstname . '! Your Password Updated. Please save these informations and dont share with anyone. We dont have a copy of it.',
             ];
             // Sending Mail
             try {
@@ -141,7 +141,7 @@ class AdminController extends Controller
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
-            'email' => 'required|email|unique:users,email,'.$user->id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
         ]);
 
         $user->update([
@@ -157,10 +157,10 @@ class AdminController extends Controller
 
         // Information that will sent to new user
         $details = [
-            'name' => $user->firstname.$user->lastname,
+            'name' => $user->firstname . $user->lastname,
             'email' => $user->email,
             'password' => $request->password,
-            'body' => 'Hello,'.$user->firstname.'! Your information Updated. Please save these informations and dont share with anyone. We dont have a copy of it.',
+            'body' => 'Hello,' . $user->firstname . '! Your information Updated. Please save these informations and dont share with anyone. We dont have a copy of it.',
         ];
 
         // Sending Mail

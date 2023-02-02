@@ -1,15 +1,14 @@
-
 <x-app-layout>
 
 
     <x-slot name="submenu">
         <!-- Navigation Links -->
-            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                {{ __('All User') }}
-            </x-nav-link>
-            <x-nav-link :href="route('users.create')" :active="request()->routeIs('users.create')">
-                {{ __('New User') }}
-            </x-nav-link>
+        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+            {{ __('All User') }}
+        </x-nav-link>
+        <x-nav-link :href="route('users.create')" :active="request()->routeIs('users.create')">
+            {{ __('New User') }}
+        </x-nav-link>
     </x-slot>
 
 
@@ -18,7 +17,11 @@
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     </x-slot>
 
-    <div class="p-6 bg-white rounded-md">
+
+    <x-table-scalatel />
+
+
+    <div class="p-6 bg-white rounded-md invisible" id="table-div">
         <table id="userTable" class="display text-center">
             <thead>
                 <tr>
@@ -40,54 +43,55 @@
         <script src="{{ asset('js/vacancy.js') }}"></script>
         <script>
             var vacancylist = null;
-            $(document).ready(function() {
-                $('#showCreateModal').click(function(e) {
-                    e.preventDefault();
-                    $("#addEditVacancyModal").show();
-                });
-                $('#cancleCreate').click(function(e) {
-                    e.preventDefault();
-                    $("#addEditVacancyModal").hide();
-                });
 
+
+            $('#table-scalatel').removeClass('hidden');
+            $('#userTable').on('init.dt', function() {
+                $('#table-scalatel').addClass('hidden');
+                $("#table-div").removeClass('invisible').show();
             });
 
-            vacancylist = $('#userTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('users.index') !!}',
-                columns: [{
-                        data: 'firstname',
-                        name: 'firstname'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'phone',
-                        name: 'phone'
-                    },
-                    {
-                        data: 'nib',
-                        name: 'nib'
-                    },
-                    {
-                        data: 'suite',
-                        name: 'suite'
-                    },
-                    {
-                        data: null,
-                        render: function(data) {
 
-                            let bookInfoUrl = BASE_URL + 'books/info/' + data.id
-                            return `<div class="flex"><a href="${BASE_URL}users/${data.id}" target="_blank" class="bg-blue-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-blue-700"><span class="iconify" data-icon="carbon:view-filled"></span></a>
+
+            setTimeout(function() {
+                vacancylist = $('#userTable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: '{!! route('users.index') !!}',
+                    columns: [{
+                            data: 'firstname',
+                            name: 'firstname'
+                        },
+                        {
+                            data: 'email',
+                            name: 'email'
+                        },
+                        {
+                            data: 'phone',
+                            name: 'phone'
+                        },
+                        {
+                            data: 'nib',
+                            name: 'nib'
+                        },
+                        {
+                            data: 'suite',
+                            name: 'suite'
+                        },
+                        {
+                            data: null,
+                            render: function(data) {
+
+                                let bookInfoUrl = BASE_URL + 'books/info/' + data.id
+                                return `<div class="flex"><a href="${BASE_URL}users/${data.id}" target="_blank" class="bg-blue-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-blue-700"><span class="iconify" data-icon="carbon:view-filled"></span></a>
                             <a href="${BASE_URL}users/${data.id}/edit" class="bg-green-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-green-700" ><span class="iconify" data-icon="dashicons:edit"></span></a>
                             <button type="button"  class="bg-red-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-red-700" onclick="userDelete(${data.id});"><span class="iconify" data-icon="bi:trash-fill"></span></button></div>`;
+                            }
                         }
-                    }
-                ]
-            });
+                    ]
+                });
+            }, 1000);
+
 
 
 
@@ -105,7 +109,7 @@
                     if (result.value) {
                         $.ajax({
                             method: 'DELETE',
-                            url: BASE_URL +'users/'+userID,
+                            url: BASE_URL + 'users/' + userID,
                             success: function(response) {
                                 if (response.status == "success") {
                                     Swal.fire('Success!', response.message, 'success');

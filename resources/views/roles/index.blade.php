@@ -2,6 +2,9 @@
 
     <x-slot name="submenu">
         <!-- Navigation Links -->
+        <x-nav-link :href="route('permissions.index')" :active="request()->routeIs('permissions.index')">
+            {{ __('All Permissions') }}
+        </x-nav-link>
         <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
             {{ __('All Role') }}
         </x-nav-link>

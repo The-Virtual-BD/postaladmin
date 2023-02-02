@@ -19,7 +19,7 @@
 
     <x-table-scalatel />
 
-    <div class="p-6 bg-white rounded-md w-full invissible" id="table-div">
+    <div class="p-6 bg-white rounded-md w-full invisible" id="table-div">
         <table id="userTable" class="display text-center">
             <thead>
                 <tr>

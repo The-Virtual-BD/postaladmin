@@ -33,7 +33,13 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            return Datatables::of(User::query())->addIndexColumn()->make(true);
+            return Datatables::of(
+                User::with('roles')->whereHas(
+                    'roles', function($q){
+                        $q->where('name','user');
+                    }
+                )->get()
+            )->addIndexColumn()->make(true);
         }
         return view('users.index');
     }
