@@ -16,11 +16,14 @@ class FlightController extends Controller
      */
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
-            return Datatables::of(Flight::query())->make(true);
+            $flights = Flight::getFlight($request);
+            return Datatables::of($flights)->make(true);
         }
         return view('flights.index');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -121,15 +124,15 @@ class FlightController extends Controller
      * @param  \App\Models\Flight  $flight
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $flight = Flight::find($request->id);
+        $flight = Flight::find($id);
 
         $delete = $flight->delete();
         if ($delete) {
-            return response()->json(['status' => 'success', 'message' => 'Media deleted successfully']);
+            return response()->json(['status' => 'success', 'message' => 'Flight deleted successfully']);
             # code...
         }
-        return response()->json(['status' => 'error', 'message' => 'Media Could not delete']);
+        return response()->json(['status' => 'error', 'message' => 'Flight Could not delete']);
     }
 }

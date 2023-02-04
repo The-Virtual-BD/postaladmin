@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth']], function() {
     // Team Member route
     Route::resource('teamMembers', TeamMemberController::class);
 
-
+    // Flights route
     Route::resource('flights',FlightController::class);
 
 
