@@ -37,9 +37,13 @@
     </div>
 
 
+
+
+
     <x-slot name="script">
         <!-- DataTables -->
         <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="{{asset('js/jquery-barcode.js')}}"></script>
         <script src="{{ asset('js/vacancy.js') }}"></script>
         <script>
             var vacancylist = null;
@@ -83,14 +87,19 @@
                             render: function(data) {
 
                                 let bookInfoUrl = BASE_URL + 'books/info/' + data.id
-                                return `<div class="flex"><a href="${BASE_URL}users/${data.id}" target="_blank" class="bg-blue-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-blue-700"><span class="iconify" data-icon="carbon:view-filled"></span></a>
-                            <a href="${BASE_URL}users/${data.id}/edit" class="bg-green-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-green-700" ><span class="iconify" data-icon="dashicons:edit"></span></a>
-                            <button type="button"  class="bg-red-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-red-700" onclick="userDelete(${data.id});"><span class="iconify" data-icon="bi:trash-fill"></span></button></div>`;
+                                return `<div class="flex justify-end">
+                                    <a href="${BASE_URL}users/${data.id}" class="bg-blue-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-blue-700"><span class="iconify" data-icon="carbon:view-filled"></span></a>
+
+                                    <a href="${BASE_URL}users/${data.id}/edit" class="bg-green-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-green-700" ><span class="iconify" data-icon="dashicons:edit"></span></a>
+                                    <button type="button"  class="bg-red-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-red-700" onclick="userDelete(${data.id});"><span class="iconify" data-icon="bi:trash-fill"></span></button>
+                                    </div>`;
                             }
                         }
                     ]
                 });
             }, 1000);
+
+            // <button type="button"  class="bg-orange-600 rounded-md text-white py-2 px-2 mx-1 hover:bg-orange-700" onclick="generateBarcode(${data.suite});"><span class="iconify" data-icon="mdi:barcode-scan"></span></button>
 
 
 
@@ -123,6 +132,21 @@
                     }
                 });
             }
+
+
+            function generateBarcode(suite) {
+                var suitestr = suite.toString();
+                console.log(suitestr);
+                $('.barcodepop').toggleClass('hidden').toggleClass('flex');
+                $("#barcode").barcode( suitestr , "ean8");
+            }
+
+            $('.barcodepop').click(function (e) {
+                e.preventDefault();
+                $('.barcodepop').toggleClass('hidden').toggleClass('flex');
+            });
+
+
             // BASE_URL +'users/'+userID
         </script>
 

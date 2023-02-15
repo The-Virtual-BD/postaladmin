@@ -37,7 +37,7 @@
                         <x-text-input  type="email" name="email" id="email" class="w-full" required />
                     </div>
                     <div class="col-span-6 sm:col-span-3">
-                        <x-input-label for="nib">Email</x-input-label>
+                        <x-input-label for="nib">NIB</x-input-label>
                         <x-text-input type="text" name="nib" id="nib" class="w-full" required />
                     </div>
                 </div>

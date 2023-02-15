@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Profile;
+use Spatie\Permission\Models\Role;
+
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Expr\New_;
 
@@ -63,7 +65,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-
         $request->validate([
             'firstname' => ['required', 'string', 'max:255'],
             'lastname' => ['required', 'string', 'max:255'],
@@ -73,7 +74,8 @@ class UserController extends Controller
         ]);
 
         $randomnumber =   rand(123456, 654321);
-        $suite = date('mds');
+        $suite = date('mds').'00';
+
         if (User::count() > 0) {
             $lastuser = User::latest()->first('suite');
             $suite = $lastuser->suite + 1;
@@ -93,6 +95,12 @@ class UserController extends Controller
         $profile = Profile::create([
             'user_id' => $user->id
         ]);
+
+
+
+        $role = Role::where('name','user')->first();
+
+        $user->assignRole([$role->id]);
 
 
         $details = [

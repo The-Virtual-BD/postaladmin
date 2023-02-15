@@ -43,6 +43,12 @@ class AdminController extends Controller
     }
 
 
+    public function show(User $user)
+    {
+        return view('admins.show', compact('user'));
+    }
+
+
     public function create()
     {
         $roles = Role::where('name', '!=', 'user')->get();

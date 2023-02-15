@@ -94,6 +94,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::controller(AdminController::class)->prefix('admins')->group(function () {
         Route::get('/', 'index')->name('admins.index');
         Route::get('/create', 'create')->name('admins.create');
+        Route::get('/show/{user}', 'show')->name('admins.show');
         Route::post('/store', 'store')->name('admins.store');
         Route::post('/admin/{user}', 'show')->name('admins.show');
         Route::get('/{admin}/edit', 'edit')->name('admins.edit');

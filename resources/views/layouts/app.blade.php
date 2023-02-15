@@ -26,7 +26,15 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="antialiased font-poppins flex">
+    <body class="antialiased font-poppins flex relative">
+
+        {{-- Barcode popup --}}
+        <div class="p-2 absolute z-50 w-full h-full bg-gray-500/40 justify-center items-center hidden barcodepop">
+
+            <div class="w-48 h-84 bg-white rounded-md p-6 flex justify-center items-center">
+                <div class="" id="barcode"></div>
+            </div>
+        </div>
 
 
         <div class="w-52 hidden sm:block transition duration-150 ease-in-out" id="sidebar">
