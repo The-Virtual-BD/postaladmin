@@ -32,20 +32,25 @@
                 </div>
             </div>
         </form>
+        <div class="">
 
+            <x-table-scalatel />
 
-        <x-table-scalatel />
+            <div class="bg-white p-6 rounded invisible" id="table-div">
+                <table id="locationtable" class="display text-center">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
 
-        <div class="bg-white p-6 rounded">
-            <table id="locationtable" class="display text-center">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-            </table>
+            
         </div>
+
+
 
     </div>
 
