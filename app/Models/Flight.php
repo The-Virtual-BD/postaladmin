@@ -67,7 +67,7 @@ class Flight extends Model
            ->where('flights.origin',$origin)
            ->where('flights.deperture',$deperture)
         //    ->where('flights.change',$change)
-        //    ->where('flights.connect',$connect)
+           ->where('flights.connect',$connect)
            ->orderBy('id', 'DESC')
            ->get();
    }
