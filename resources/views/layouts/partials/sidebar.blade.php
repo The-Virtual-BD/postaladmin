@@ -52,7 +52,7 @@
             <hr class="border border-blue-400/90">
             <x-sidenav-link :href="route('currier.dash')" :active="request()->routeIs('currier.dash')">
                 <span class="iconify" data-icon="bxs:package"></span>
-                <p class="sidelinktext">Currier</p>
+                <p class="sidelinktext">Courier</p>
             </x-sidenav-link>
             <div class="w-20"></div>
 
